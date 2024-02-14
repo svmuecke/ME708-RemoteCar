@@ -1,0 +1,32 @@
+//Sven Mücke
+//KU-ID: 3167279
+//Date: 02/07/2024
+//Version: V1
+//Description
+
+//Include needed libaries
+
+
+//Defining vars
+
+
+//Defining own functions
+
+
+
+//Setup function
+void setup(){
+    Serial.begin(9600);
+    //Setup 1
+    pinMode(a,OUTPUT);
+    //Setup 2
+    pinMode(b,INPUT_PULLUP);
+}
+
+
+//Loop function
+void loop() {
+
+
+
+}
