@@ -14,7 +14,8 @@
 //#include 'IR.h'
 //#include 'LineSensor.h'
 //#include 'Servo.h'
-#include 'MotorController.h'
+#include "Components.h"
+//#include "MotorController.cpp"
 //#include 'RemoteControl.h'
 //#include 'LineFollowing.h'
 //#include 'ObstacleAvoidance.h'
@@ -93,7 +94,8 @@ void setup()
 //Loop function   
 void loop()
 {
-  
+  MotorController mc;
+  mc.forward(100);
 }
 
 

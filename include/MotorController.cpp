@@ -1,25 +1,7 @@
-//Inlude external libaries
+//Include external libaries
 #include <Arduino.h>
-#include 'MotorController.h'
+#include "Components.h"
 
-
-class motorcontroller {
-public:
-float x, y;
-void print() {Serial.println(x); Serial.println(y);}
-void set(float u, float v) {x = u; y = v;}
-};
-
-class MotorController{
-  public:
-  	int motorspeed;
-  	void forward(int speed);
-  	void right(int speed);
-  	void left(int speed);
-    void right45();
-    void left45();
-  	void setspeed(int speed);
-};
 
 void MotorController::forward(int speed = 100)
 {
@@ -56,3 +38,6 @@ void MotorController::left(int speed = 100)
 
 
 
+void loop(){
+	MotorController mc;
+}
