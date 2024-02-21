@@ -2,6 +2,6 @@
 #define Ultrasound_H
 #include <Arduino.h>
 
-void getDistance();
+float getDistance();
 
 #endif

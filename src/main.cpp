@@ -7,8 +7,17 @@
 #include <Arduino.h>
 #include <Servo.h>
 
+
 //Include selfwritten libaries
-#include 'Ultrasound.h'
+//#include 'Ultrasound.h'
+//#include 'LED.h'
+//#include 'IR.h'
+//#include 'LineSensor.h'
+//#include 'Servo.h'
+#include 'MotorController.h'
+//#include 'RemoteControl.h'
+//#include 'LineFollowing.h'
+//#include 'ObstacleAvoidance.h'
 
 //Defining vars
 //Vars for motor controller
@@ -61,7 +70,7 @@ void setup()
 
   //Servo motor pins as output
   servosound.attach(servosoundPin);
-  servopick.attach(servopick);
+  servopick.attach(servopickPin);
 
   //Ultrasound
   pinMode(echorotPin,INPUT);

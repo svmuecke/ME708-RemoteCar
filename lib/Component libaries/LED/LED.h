@@ -2,6 +2,6 @@
 #define LED_H
 #include <Arduino.h>
 
-void blinken();
+//functions;
 
 #endif
