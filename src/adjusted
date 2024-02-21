@@ -1,0 +1,100 @@
+#include <Arduino.h>
+#include <Servo.h>
+
+// Define pins
+int motorPin1 = 3;
+int motorPin2 = 4;
+int motorPin3 = 5;
+int motorPin4 = 6;
+int enablePinR = 9;
+int enablePinL = 10;
+
+// Define variables
+int state;
+int flag = 0;
+
+// Initialize serial communication at 9600 bits per second
+void setup() {
+    pinMode(motorPin1, OUTPUT);
+    pinMode(motorPin2, OUTPUT);
+    pinMode(motorPin3, OUTPUT);
+    pinMode(motorPin4, OUTPUT);
+    pinMode(enablePinR, OUTPUT);
+    pinMode(enablePinL, OUTPUT);
+    digitalWrite(enablePinR, HIGH);
+    digitalWrite(enablePinL, HIGH);
+    Serial.begin(9600);
+}
+
+void loop() {
+    if (Serial.available() > 0) {
+        state = Serial.read();
+        Serial.println(state);
+        flag = 0;
+    }
+
+    if (state == '0') {
+        analogWrite(enablePinR, 0);
+        analogWrite(enablePinL, 0);
+        digitalWrite(motorPin1, LOW);
+        digitalWrite(motorPin2, LOW);
+        digitalWrite(motorPin3, LOW);
+        digitalWrite(motorPin4, LOW);
+        if (flag == 0) {
+            Serial.println("Motors: off");
+            flag = 1;
+        }
+    }
+
+    if (state == '8') {
+        digitalWrite(motorPin1, HIGH);
+        digitalWrite(motorPin2, LOW);
+        digitalWrite(motorPin3, HIGH);
+        digitalWrite(motorPin4, LOW);
+        analogWrite(enablePinR, 100);
+        analogWrite(enablePinL, 98);
+        if (flag == 0) {
+            Serial.println("Both Motors: forward");
+            flag = 1;
+        }
+    }
+
+    else if (state == '6') {
+        digitalWrite(motorPin1, LOW);
+        digitalWrite(motorPin2, HIGH);
+        digitalWrite(motorPin3, LOW);
+        digitalWrite(motorPin4, HIGH);
+        analogWrite(enablePinR, 60);
+        analogWrite(enablePinL, 60);
+        if (flag == 0) {
+            Serial.println("Motor: right");
+            flag = 1;
+        }
+    }
+
+    else if (state == '4') {
+        digitalWrite(motorPin1, HIGH);
+        digitalWrite(motorPin2, LOW);
+        digitalWrite(motorPin3, LOW);
+        digitalWrite(motorPin4, HIGH);
+        analogWrite(enablePinR, 60);
+        analogWrite(enablePinL, 60);
+        if (flag == 0) {
+            Serial.println("Motor: left");
+            flag = 1;
+        }
+    }
+
+    else if (state == '2') {
+        digitalWrite(motorPin1, LOW);
+        digitalWrite(motorPin2, HIGH);
+        digitalWrite(motorPin3, HIGH);
+        digitalWrite(motorPin4, LOW);
+        analogWrite(enablePinR, 72);
+        analogWrite(enablePinL, 70);
+        if (flag == 0) {
+            Serial.println("Both Motors: backwards");
+            flag = 1;
+        }
+    }
+}
