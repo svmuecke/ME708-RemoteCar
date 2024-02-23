@@ -4,7 +4,15 @@ project(MECHATRONIC_708)
 # Our Project
 set(SOURCE_FILES
 main.cpp
+RemoteControl.cpp
+LineFollowing.cpp
+ObstacleAvoidance.cpp
+IR.cpp
 LED.cpp
+LineSensor.cpp
+MotorController.cpp
+Servo.cpp
+Ultrasound.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})

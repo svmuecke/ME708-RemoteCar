@@ -2,6 +2,9 @@
 #include <Arduino.h>
 #include "../Components/MotorController.cpp"
 #include "../Components/LED.h"
+#include "../Components/IR.h"
+
+
 //Vars to control components
 int speed = 100;
 int speedturn = 50;
@@ -21,4 +24,9 @@ void licht()
 {
     LED testleuchte;
     testleuchte.blinkenextern();
+}
+
+void remote()
+{
+
 }

@@ -1,8 +1,14 @@
+#pragma once
+
 //Include external libaries
-
 #include <Arduino.h>
-#include "Components/LED.h"
 
+
+class LED{
+  public:
+    void blinkenintern();
+    void blinkenextern();
+};
 
 void LED::blinkenintern()
 {
@@ -15,7 +21,7 @@ void LED::blinkenintern()
 void LED::blinkenextern()
 {
   digitalWrite(LEDtest,HIGH);
-  delay(2000);
+  delay(500);
   digitalWrite(LEDtest,LOW);
-  delay(2000);
+  delay(500);
 }

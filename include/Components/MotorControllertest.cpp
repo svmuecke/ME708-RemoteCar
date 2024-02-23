@@ -1,6 +1,7 @@
+#pragma once
+
 //Include external libaries
 #include <Arduino.h>
-
 
 class MotorController{
   public:

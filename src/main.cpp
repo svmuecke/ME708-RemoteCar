@@ -52,10 +52,10 @@ int LEDtest = 0;
 
 
 //Include selfwritten functions/components
-#include "Functions/RemoteControl.cpp"
-//#include "Functions/LineFollowing.cpp"
-//#include "Functions/ObstacleAvoidance.cpp"
-//#include "Components/IR.cpp"
+#include "Functions/RemoteControl.h"
+#include "Functions/LineFollowing.h"
+#include "Functions/ObstacleAvoidance.h"
+#include "Components/IR.h"
 #include "Components/LED.h"
 
 void setup()
@@ -95,7 +95,32 @@ void setup()
 //Loop function   
 void loop()
 {
-  licht();
+  ///Startupsequence: all LEDS blink for 3s
+  ///...
+
+  //Read IRButton
+  //irState = ...;
+
+    ///Choose Mode: 1-Line 2- Obstacle 3- Remote 
+  switch (irState){
+    case 1: //Remote
+      remote();
+      break;
+
+    case 2: //Obstacle
+      obstacle();
+      break;
+
+    case 3: //LineFollowing
+      linefollowing();
+      break;
+  }
+
+  ///Stop Everything when pushing Stop/Mode or Off Switch -> How implementation?
+  ///New Choice
+
+
 }
+
 
 

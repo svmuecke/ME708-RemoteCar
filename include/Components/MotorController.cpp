@@ -1,4 +1,6 @@
+#pragma once
 //Include external libaries
+#pragma once
 #include <Arduino.h>
 
 class MotorController{
