@@ -8,17 +8,6 @@
 #include <Servo.h>
 
 
-//Include selfwritten libaries
-//#include 'Ultrasound.h'
-//#include 'LED.h'
-//#include 'IR.h'
-//#include 'LineSensor.h'
-//#include 'Servo.h'
-
-//#include 'RemoteControl.h'
-//#include 'LineFollowing.h'
-//#include 'ObstacleAvoidance.h'
-
 //Defining vars
 //Vars for motor controller
 int AIN1 = 4;
@@ -58,17 +47,14 @@ int greenPin = A1;
 int bluePin = A2;
 int yellowPin = 0;
 int LEDtest = 13;
-//#include "Components.h"
-//#include "Components/MotorController.cpp"//
-int AIN1 = 13; //control pin 1 on the motor driver for the right motor
-int AIN2 = 12; //control pin 2 on the motor driver for the right motor
-int PWMA = 11;
 
-//#include "Components/MotorControllertest.cpp"
+//Include selfwritten functions/components
+
 #include "Functions/RemoteControl.cpp"
-
-
-
+//#include "Functions/LineFollowing.cpp"
+//#include "Functions/ObstacleAvoidance.cpp"
+#include "Components/IR.cpp"
+#include "Components/LED.cpp"
 
 void setup()
 {
@@ -76,9 +62,9 @@ void setup()
   pinMode(AIN1,OUTPUT);
   pinMode(AIN2,OUTPUT);
   pinMode(PWMA,OUTPUT);
-  //pinMode(BIN1,OUTPUT);
-  //pinMode(BIN2,OUTPUT);
-  //pinMode(PWMB,OUTPUT);
+  pinMode(BIN1,OUTPUT);
+  pinMode(BIN2,OUTPUT);
+  pinMode(PWMB,OUTPUT);
 
   //Servo motor pins as output
   servosound.attach(servosoundPin);
@@ -108,7 +94,6 @@ void setup()
 void loop()
 {
   test();
-
 }
 
 

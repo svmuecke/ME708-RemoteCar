@@ -1,11 +1,19 @@
+#pragma once
+
 #include <Arduino.h>
-#include "../Components/MotorControllertest.cpp"
+#include "../Components/MotorController.cpp"
+
+//Vars to control components
+int speed = 100;
+int speedturn = 50;
+
+
 
 void test()
 {
     MotorController mc;
-    mc.start();
+    mc.forward(speedturn);
     delay(1000);
-    mc.stop();
+    mc.backwards(speedturn);
     delay(1000);
 }
