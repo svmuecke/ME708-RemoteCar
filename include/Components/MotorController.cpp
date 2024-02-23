@@ -1,7 +1,22 @@
 //Include external libaries
 #include <Arduino.h>
-#include "Components.h"
 
+
+//int AIN1 = 4;
+//int AIN2 = 5;
+//int PWMA = 3;
+int BIN1 = 7;
+int BIN2 = 8;
+int PWMB = 6;
+
+
+class MotorController{
+  public:
+  	int motorspeed;
+  	void forward(int speed);
+  	void right(int speed);
+  	void left(int speed);
+};
 
 void MotorController::forward(int speed = 100)
 {
@@ -36,8 +51,3 @@ void MotorController::left(int speed = 100)
 }
 
 
-
-
-void loop(){
-	MotorController mc;
-}

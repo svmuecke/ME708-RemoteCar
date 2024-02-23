@@ -14,8 +14,7 @@
 //#include 'IR.h'
 //#include 'LineSensor.h'
 //#include 'Servo.h'
-#include "Components.h"
-//#include "MotorController.cpp"
+
 //#include 'RemoteControl.h'
 //#include 'LineFollowing.h'
 //#include 'ObstacleAvoidance.h'
@@ -58,6 +57,18 @@ int redPin = A0;
 int greenPin = A1;
 int bluePin = A2;
 int yellowPin = 0;
+int LEDtest = 13;
+//#include "Components.h"
+//#include "Components/MotorController.cpp"//
+int AIN1 = 13; //control pin 1 on the motor driver for the right motor
+int AIN2 = 12; //control pin 2 on the motor driver for the right motor
+int PWMA = 11;
+
+//#include "Components/MotorControllertest.cpp"
+#include "Functions/RemoteControl.cpp"
+
+
+
 
 void setup()
 {
@@ -65,9 +76,9 @@ void setup()
   pinMode(AIN1,OUTPUT);
   pinMode(AIN2,OUTPUT);
   pinMode(PWMA,OUTPUT);
-  pinMode(BIN1,OUTPUT);
-  pinMode(BIN2,OUTPUT);
-  pinMode(PWMB,OUTPUT);
+  //pinMode(BIN1,OUTPUT);
+  //pinMode(BIN2,OUTPUT);
+  //pinMode(PWMB,OUTPUT);
 
   //Servo motor pins as output
   servosound.attach(servosoundPin);
@@ -87,15 +98,17 @@ void setup()
   pinMode(greenPin,OUTPUT);
   pinMode(bluePin,OUTPUT);
   pinMode(yellowPin,OUTPUT);
+
+  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(LEDtest,OUTPUT);
 }
 
-//Defining own functions 
-   
+
 //Loop function   
 void loop()
 {
-  MotorController mc;
-  mc.forward(100);
+  test();
+
 }
 
 
