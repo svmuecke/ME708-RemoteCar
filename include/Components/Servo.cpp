@@ -1,6 +1,5 @@
+//Include external libaries
 #include <Arduino.h>
-#include 'Servo.h'
-#include <Servo.h> 
 
 //Defining vars
 //Define servo motor 

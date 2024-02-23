@@ -1,3 +1,6 @@
+//Include external libaries
+#include <Arduino.h>
+
 void blinkenintern(){
   digitalWrite(LED_BUILTIN, HIGH);
   delay(100);

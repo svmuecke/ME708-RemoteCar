@@ -1,5 +1,5 @@
+//Include external libaries
 #include <Arduino.h>
-#include Ultrasound.h
 
 //Defining vars
 
