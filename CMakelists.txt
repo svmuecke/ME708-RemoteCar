@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.24)
+project(MECHATRONIC_708)
+
+# Our Project
+set(SOURCE_FILES
+main.cpp
+LED.cpp
+)
+
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})

@@ -46,15 +46,17 @@ int redPin = A0;
 int greenPin = A1;
 int bluePin = A2;
 int yellowPin = 0;
-int LEDtest = 13;
+
+//Delete later
+int LEDtest = 0;
+
 
 //Include selfwritten functions/components
-
 #include "Functions/RemoteControl.cpp"
 //#include "Functions/LineFollowing.cpp"
 //#include "Functions/ObstacleAvoidance.cpp"
-#include "Components/IR.cpp"
-#include "Components/LED.cpp"
+//#include "Components/IR.cpp"
+#include "Components/LED.h"
 
 void setup()
 {
@@ -93,7 +95,7 @@ void setup()
 //Loop function   
 void loop()
 {
-  test();
+  licht();
 }
 
 

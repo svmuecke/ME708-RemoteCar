@@ -1,11 +1,8 @@
 //Include external libaries
-#include <Arduino.h>
 
-class LED{
-  public:
-    void blinkenintern();
-    void blinkenextern();
-};
+#include <Arduino.h>
+#include "Components/LED.h"
+
 
 void LED::blinkenintern()
 {
@@ -18,7 +15,7 @@ void LED::blinkenintern()
 void LED::blinkenextern()
 {
   digitalWrite(LEDtest,HIGH);
-  delay(500);
+  delay(2000);
   digitalWrite(LEDtest,LOW);
-  delay(500);
+  delay(2000);
 }
