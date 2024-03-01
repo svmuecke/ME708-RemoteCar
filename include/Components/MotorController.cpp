@@ -3,18 +3,29 @@
 #pragma once
 #include <Arduino.h>
 
+
 class MotorController{
   public:
-  	void forward(int speed);
-	void backwards(int speed);
-  	void right(int speedturn);
-  	void left(int speedturn);
-	void right45(int speedturn);
-	void left45(int speedturn);
+	int speed = 100;
+	int speedturn = 50;
+	void set_speed(int motorspeed);
+  	void forward();
+	void stop();
+	void backwards();
+  	void right();
+  	void left();
+	void right45();
+	void left45();
 };
 
+void MotorController::set_speed(int motorspeed)
+{
+	speed = motorspeed;
+	speedturn = motorspeed * 0.5;
+}
+
 //Forwards
-void MotorController::forward(int speed)
+void MotorController::forward()
 {
 	digitalWrite(AIN1, HIGH);
 	digitalWrite(AIN2, LOW);
@@ -24,8 +35,17 @@ void MotorController::forward(int speed)
   	analogWrite(PWMB, speed);
 }
 
+void MotorController::stop()
+{ 
+	digitalWrite(AIN1, HIGH);
+	digitalWrite(AIN2, LOW);
+  	digitalWrite(BIN1, HIGH);
+	digitalWrite(BIN2, LOW);
+	analogWrite(PWMA, 0);
+  	analogWrite(PWMB, 0);
+}
 //Backwards
-void MotorController::backwards(int speed)
+void MotorController::backwards()
 {
 	digitalWrite(AIN1, LOW);
 	digitalWrite(AIN2, HIGH);
@@ -36,7 +56,7 @@ void MotorController::backwards(int speed)
 }
 
 //Turn left on spot
-void MotorController::right(int speedturn)
+void MotorController::right()
 {
 	digitalWrite(AIN1, HIGH);
 	digitalWrite(AIN2,LOW);
@@ -47,7 +67,7 @@ void MotorController::right(int speedturn)
 }
 
 //Turn left while continuing forward driving
-void MotorController::right45(int speedturn)
+void MotorController::right45()
 {
 	digitalWrite(AIN1, HIGH);
 	digitalWrite(AIN2,LOW);
@@ -57,7 +77,7 @@ void MotorController::right45(int speedturn)
   	analogWrite(PWMB, speedturn);
 }
 //Turn right on spot
-void MotorController::left(int speedturn)
+void MotorController::left()
 {
 	digitalWrite(AIN1, LOW);
 	digitalWrite(AIN2, HIGH);
@@ -68,7 +88,7 @@ void MotorController::left(int speedturn)
 }
 
 //Turn right while continuing forward driving
-void MotorController::left45(int speedturn)
+void MotorController::left45()
 {
 	digitalWrite(AIN1, LOW);
 	digitalWrite(AIN2, HIGH);

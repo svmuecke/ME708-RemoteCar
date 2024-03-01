@@ -6,6 +6,9 @@
 //Inlude external libaries
 #include <Arduino.h>
 #include <Servo.h>
+#define IR_SMALLD_NEC
+#include <IRsmallDecoder.h>
+
 
 
 //Defining vars
@@ -26,29 +29,35 @@ Servo servopick;
 //Vars for ultrasound sensors
 int echorotPin = 12;
 int trigrotPin = 13;
-int echostatPin = 1;
-int trigstatPin = 2;
+int echostatPin = A0;
+int trigstatPin = 11;
+float distancestat;
 
 //Vars for linesensors
-int lineleftPin = A3;
+int lineleftPin = A3; //in driving direction
 int linemidPin = A4;
-int linerightPin = A5;
+int linerightPin = A5; //black cable
 int lineleftState;
 int linemidState;
 int linerightState;
 
 //Vars for ir-receiver
-int irPin = 13;
-int irState;
+int IRpin = 2;
+IRsmallDecoder irDecoder(IRpin);
+irSmallD_t irData;
+int IRstate;
 
 //Vars for LEDs
-int redPin = A0;
-int greenPin = A1;
-int bluePin = A2;
-int yellowPin = 0;
+int redPin = 1;
+int green2Pin = 0;
+int green1Pin = A2;
+int yellowPin = A1;
 
 //Delete later
-int LEDtest = 0;
+int LEDtest = 10;
+
+//Refresh rates
+int refresh_remote = 3000;
 
 
 //Include selfwritten functions/components
@@ -57,9 +66,13 @@ int LEDtest = 0;
 #include "Functions/ObstacleAvoidance.h"
 #include "Components/IR.h"
 #include "Components/LED.h"
+#include "Components/Test.h"
 
 void setup()
 {
+  //Start Serial Monitor
+  Serial.begin(9600);
+
   //Motor controller pins as output
   pinMode(AIN1,OUTPUT);
   pinMode(AIN2,OUTPUT);
@@ -79,22 +92,87 @@ void setup()
   pinMode(trigstatPin,OUTPUT);
 
   //IR pin as input
-  pinMode(irPin,INPUT);
+  //pinMode(irPin,INPUT);
 
   //LED pins as output
   pinMode(redPin,OUTPUT);
-  pinMode(greenPin,OUTPUT);
-  pinMode(bluePin,OUTPUT);
+  pinMode(green1Pin,OUTPUT);
+  pinMode(green2Pin,OUTPUT);
   pinMode(yellowPin,OUTPUT);
 
+  //Just for Testing
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(LEDtest,OUTPUT);
 }
 
+float getDistance()
+{
+	float echoTime;
+	float calculatedDistance;
+	digitalWrite(trigstatPin, HIGH);
+	delayMicroseconds(10);
+	digitalWrite(trigstatPin, LOW);
+	echoTime= pulseIn(echostatPin, HIGH);
+	calculatedDistance= echoTime/ 148.0;
+	return calculatedDistance;
+}
+
 
 //Loop function   
+
+  //test();
+  //Ledbuiltin();
+  //Serial.println('1');
+  //MotorController mc;
+  //Serial.println('2');
+  //mc.forward();
+  //delay(1000);
+  //Serial.println('3');
+  //mc.backwards(100);
+  //delay(1000);
+
+  //if(irDecoder.dataAvailable(irData)){
+  //  int x = irData.cmd;
+  //  Serial.println(x);
+  //  if (x==26)Serial.println('The key is 9');
+  //}
+
+ 
+
+
 void loop()
 {
+  startup();
+  getData();
+  IRstate = 13;
+    switch (IRstate)
+    {
+    case 13:
+      remote();
+      break;
+    
+    case 14:
+      //line();
+      break;
+
+    case 15:
+    obstacle();
+      break;
+
+    default:
+      break;
+    }
+}
+
+
+
+
+  
+  //staticUltra ultra;
+  //int i = ultra.getDistance();
+  //Serial.println(i);
+  //delay(1000);
+
   ///Startupsequence: all LEDS blink for 3s
   ///...
 
@@ -102,25 +180,25 @@ void loop()
   //irState = ...;
 
     ///Choose Mode: 1-Line 2- Obstacle 3- Remote 
-  switch (irState){
-    case 1: //Remote
-      remote();
-      break;
+  //switch (irState){
+    //case 1: //Remote
+      //remote();
+      //break;
 
-    case 2: //Obstacle
-      obstacle();
-      break;
+    //case 2: //Obstacle
+      //obstacle();
+      //break;
 
-    case 3: //LineFollowing
-      linefollowing();
-      break;
-  }
+    //case 3: //LineFollowing
+      //linefollowing();
+      //break;
+  //}
 
   ///Stop Everything when pushing Stop/Mode or Off Switch -> How implementation?
   ///New Choice
 
 
-}
+
 
 
 

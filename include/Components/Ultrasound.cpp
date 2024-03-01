@@ -3,13 +3,25 @@
 //Include external libaries
 #include <Arduino.h>
 
-//Static ultrasound
-class staticUltra{
+
+
+class Ultrasound{
     public:
+        int echo;
+        int trig;
+        void set(int echopin, int trigpin);
         float getDistance();
+        
+
 };
 
-float staticUltra::getDistance()
+void Ultrasound::set(int echopin, int trigpin)
+{
+    echo = echopin;
+    trig = trigpin;
+}
+
+float Ultrasound::getDistance()
 {
     float echoTime; //var to store the time it takes for a ping to bounce back off an object
     float calculatedDistance; //var to store the distance calculated from the echo time

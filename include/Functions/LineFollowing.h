@@ -1,5 +1,4 @@
 #pragma once
 #include "LineFollowing.cpp"
 
-
-void linefollowing();
+void line();

@@ -5,6 +5,8 @@
 #include "../Components/Servo.h"
 
 
+float distance_static;
+
 void obstacle(){
     
 }

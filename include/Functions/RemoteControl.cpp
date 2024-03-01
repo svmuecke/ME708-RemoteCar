@@ -5,28 +5,35 @@
 #include "../Components/IR.h"
 
 
-//Vars to control components
-int speed = 100;
-int speedturn = 50;
-
-
-void test()
-{
-    MotorController mc;
-    mc.forward(speedturn);
-    delay(1000);
-    mc.backwards(speedturn);
-    delay(1000);
-}
-
-
-void licht()
-{
-    LED testleuchte;
-    testleuchte.blinkenextern();
-}
 
 void remote()
 {
+  MotorController mc;
+  while(IRstate != 6)
+  {
+    getData();
+    IRstate = 5;
+    switch (IRstate)
+    {
+    case 5:
+      mc.forward();
+      break;
+    
+    case 11:
+      mc.backwards();
+      break;
 
+    case 7:
+      mc.left();
+      break;
+
+    default:
+      break;
+    }
+    delay(refresh_remote);
+    getData();
+    IRstate = 6;
+  }
+  mc.stop();
+    
 }

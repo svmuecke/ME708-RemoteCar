@@ -3,13 +3,11 @@
 #include "../Components/MotorController.h"
 #include "../Components/LineSensor.h"
 
-void test2()
-{
-    MotorController nx;
-    nx.forward(100);
-}
+int val_right;
+int val_mid;
+int val_left;
 
 
-void linefollowing(){
+void line(){
     
 }

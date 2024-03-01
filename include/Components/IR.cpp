@@ -3,7 +3,16 @@
 #include <Arduino.h>
 
 
-class IR{
-  public:
+
+void getData(){
   
-};
+  if(irDecoder.dataAvailable(irData)) 
+  {
+    int IRstate = irData.cmd;
+  }
+}
+
+
+
+
+

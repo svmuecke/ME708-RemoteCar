@@ -1,4 +1,4 @@
 #pragma once
 #include "Ultrasound.cpp"
 
-class staticUltra;
+class Ultrasound;
