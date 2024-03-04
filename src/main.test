@@ -20,12 +20,4 @@
   //}
 
 
-  linerightState = analogRead(linerightPin);
-  Serial.println("right");
-  Serial.println(linerightState);
-  linemidState = analogRead(linemidPin);
-  Serial.println("Mid");
-  Serial.println(linemidState);
-  lineleftState = analogRead(lineleftPin);
-  Serial.println("left");
-  Serial.println(lineleftState);
+ 

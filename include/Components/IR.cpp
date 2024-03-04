@@ -5,14 +5,15 @@
 
 
 void getData(){
-  
   if(irDecoder.dataAvailable(irData)) 
   {
     int IRstate = irData.cmd;
   }
 }
 
-
+void transformIRstate(){
+ 
+}
 
 
 

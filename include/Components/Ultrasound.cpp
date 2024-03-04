@@ -27,11 +27,11 @@ float Ultrasound::getDistance()
     float calculatedDistance; //var to store the distance calculated from the echo time
 
     //Sound out an ultrasonic pulse that's 10 m long
-    digitalWrite(trigstatPin,HIGH);
+    digitalWrite(trig,HIGH);
     delayMicroseconds(10);
-    digitalWrite(trigstatPin,LOW);
+    digitalWrite(trig,LOW);
 
-    echoTime = pulseIn(echostatPin, HIGH); //Use the pulsein command to see how long it takes for the pulse to bounce back to the sensor
+    echoTime = pulseIn(echo, HIGH); //Use the pulsein command to see how long it takes for the pulse to bounce back to the sensor
 
     calculatedDistance = echoTime / 148.0 ; //Calculate the distance of the object that reflected the pulse 
 

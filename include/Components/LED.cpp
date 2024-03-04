@@ -52,3 +52,30 @@ void startup(){
     green2.off();
     delay(500);
 }
+
+
+void all_blinking(int duration, int repets)
+{
+   LED yellow;
+  yellow.set(yellowPin);
+  LED red;
+  red.set(redPin);
+  LED green1;
+  green1.set(green1Pin);
+  LED green2;
+  green2.set(green2Pin);
+  red.on();
+  for (int i = 1; i<= repets; i++)
+  {
+    red.on();
+    yellow.on();
+    green1.on();
+    green2.on();
+    delay(duration);
+    red.off();
+    yellow.off();
+    green1.off();
+    green2.off();
+    delay(duration);
+  }
+}

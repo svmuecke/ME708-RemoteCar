@@ -9,6 +9,7 @@
 #define IR_SMALLD_NEC
 #include <IRsmallDecoder.h>
 
+using namespace std;
 
 
 //Defining vars
@@ -32,6 +33,7 @@ int trigrotPin = 13;
 int echostatPin = A0;
 int trigstatPin = 11;
 float distancestat;
+float distancerot;
 
 //Vars for linesensors
 int lineleftPin = A3; //in driving direction
@@ -60,18 +62,12 @@ int LEDtest = 10;
 int refresh_remote = 3000;
 
 
-//Include selfwritten functions/components
-#include "Functions/RemoteControl.h"
-#include "Functions/LineFollowing.h"
-#include "Functions/ObstacleAvoidance.h"
-#include "Components/IR.h"
-#include "Components/LED.h"
-#include "Components/Test.h"
-
 void setup()
 {
   //Start Serial Monitor
   Serial.begin(9600);
+  Serial.println("Waiting for a NEC remote control IR signal...");
+  Serial.println("cmd");
 
   //Motor controller pins as output
   pinMode(AIN1,OUTPUT);
@@ -105,18 +101,13 @@ void setup()
   pinMode(LEDtest,OUTPUT);
 }
 
-float getDistance()
-{
-	float echoTime;
-	float calculatedDistance;
-	digitalWrite(trigstatPin, HIGH);
-	delayMicroseconds(10);
-	digitalWrite(trigstatPin, LOW);
-	echoTime= pulseIn(echostatPin, HIGH);
-	calculatedDistance= echoTime/ 148.0;
-	return calculatedDistance;
-}
-
+//Include selfwritten functions/components
+#include "Functions/RemoteControl.h"
+#include "Functions/LineFollowing.h"
+#include "Functions/ObstacleAvoidance.h"
+#include "Components/IR.h"
+#include "Components/LED.h"
+#include "Components/Test.h"
 
 //Loop function   
 
@@ -137,10 +128,23 @@ float getDistance()
   //  if (x==26)Serial.println('The key is 9');
   //}
 
- 
+
+void blinken(){
+  all_blinking(300,5);
+}
+
+void loop(){
+  if(irDecoder.dataAvailable(irData)){
+    Serial.println('angekommen');
+    int x = irData.cmd;
+    Serial.println(x);
+    if (x==26)Serial.println('The key is 9');
+  }
+}
 
 
-void loop()
+
+void test2()
 {
   startup();
   getData();
