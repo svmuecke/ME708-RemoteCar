@@ -37,3 +37,12 @@ void remote()
   mc.stop();
     
 }
+
+void testdrive(){
+  MotorController mc1;
+  mc1.set_speed(200);
+  mc1.right45();
+  delay(5000);
+  mc1.left45();
+  delay(5000);
+}

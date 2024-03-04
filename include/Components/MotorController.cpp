@@ -21,7 +21,7 @@ class MotorController{
 void MotorController::set_speed(int motorspeed)
 {
 	speed = motorspeed;
-	speedturn = motorspeed * 0.5;
+	speedturn = motorspeed; //original *0.5
 }
 
 //Forwards
@@ -74,7 +74,7 @@ void MotorController::right45()
   	digitalWrite(BIN1, LOW);
 	digitalWrite(BIN2, HIGH);
 	analogWrite(PWMA, speedturn);
-  	analogWrite(PWMB, speedturn);
+  	analogWrite(PWMB, 0.5*speedturn);
 }
 //Turn right on spot
 void MotorController::left()
@@ -94,6 +94,6 @@ void MotorController::left45()
 	digitalWrite(AIN2, HIGH);
   	digitalWrite(BIN1, HIGH);
 	digitalWrite(BIN2, LOW);
-	analogWrite(PWMA, speedturn);
+	analogWrite(PWMA, 0.5*speedturn);
   	analogWrite(PWMB, speedturn);
 }

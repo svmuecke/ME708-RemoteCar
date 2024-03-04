@@ -23,7 +23,7 @@ int PWMB = 6;
 
 //Vars vor servo motors
 int servosoundPin = 10;
-int servopickPin = 9;
+int servopickPin = 1;
 Servo servosound;
 Servo servopick;
 
@@ -39,9 +39,9 @@ float distancerot;
 int lineleftPin = A3; //in driving direction
 int linemidPin = A4;
 int linerightPin = A5; //black cable
-int lineleftState;
-int linemidState;
-int linerightState;
+float lineleftState;
+float linemidState;
+float linerightState;
 
 //Vars for ir-receiver
 int IRpin = 2;
@@ -50,9 +50,9 @@ irSmallD_t irData;
 int IRstate;
 
 //Vars for LEDs
-int redPin = 1;
-int green2Pin = 0;
+int redPin = 9;
 int green1Pin = A2;
+int green2Pin = 0;
 int yellowPin = A1;
 
 //Delete later
@@ -109,42 +109,20 @@ void setup()
 #include "Components/LED.h"
 #include "Components/Test.h"
 
-//Loop function   
-
-  //test();
-  //Ledbuiltin();
-  //Serial.println('1');
-  //MotorController mc;
-  //Serial.println('2');
-  //mc.forward();
-  //delay(1000);
-  //Serial.println('3');
-  //mc.backwards(100);
-  //delay(1000);
-
-  //if(irDecoder.dataAvailable(irData)){
-  //  int x = irData.cmd;
-  //  Serial.println(x);
-  //  if (x==26)Serial.println('The key is 9');
-  //}
-
-
-void blinken(){
-  all_blinking(300,5);
-}
-
+//Void loop is the current loop version, the rest are only previous tests, don't delete
 void loop(){
-  if(irDecoder.dataAvailable(irData)){
-    Serial.println('angekommen');
-    int x = irData.cmd;
-    Serial.println(x);
-    if (x==26)Serial.println('The key is 9');
-  }
+  obstacle(1000,10,0);
+  obstacle(1000,10,1);
 }
 
 
+void rotUltratest(){
+  rot_read(100,50,130,5);
+  rot_read(100,130,50,5);
+}  
 
-void test2()
+//Richtige Loop Function
+void loopreal()
 {
   startup();
   getData();
@@ -167,6 +145,30 @@ void test2()
       break;
     }
 }
+
+  //if(irDecoder.dataAvailable(irData)){
+  //  int x = irData.cmd;
+  //  Serial.println(x);
+  //  if (x==26)Serial.println('The key is 9');
+  //}
+
+
+
+void linken(){
+  all_blinking(300,5);
+}
+
+void ir(){
+  if(irDecoder.dataAvailable(irData)){
+    Serial.println('angekommen');
+    int x = irData.cmd;
+    Serial.println(x);
+    if (x==26)Serial.println('The key is 9');
+  }
+}
+
+
+
 
 
 
