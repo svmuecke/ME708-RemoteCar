@@ -3,6 +3,7 @@
 #include "../Components/MotorController.h"
 #include "../Components/Ultrasound.h"
 #include "../Components/Servo.h"
+#include "../Components/IR.h"
 
 
 float distance_static;
@@ -18,8 +19,7 @@ void stat_read(int period)
 
     distance_static = staticUltra.getDistance();
     Serial.println("Static");
-    Serial.println(distancestat);
-    
+    Serial.println(distance_static);
     delay(period);
 }
 
@@ -96,14 +96,15 @@ void calibrate(int pos){
 
 
 
-void obstacle(int period, int safety,int turning){
+void obstacle_single(int period, int safety,int turning){
 
+    //while (IR){}
     LED red;
     red.set(redPin);      //Turn on status LED
     red.on();
 
-    MotorController mc1;
-    mc1.set_speed(150);
+    MotorController mc;
+    //mc1.set_speed(150);
 
     stat_read(0);
     if (turning == 0){
@@ -121,40 +122,49 @@ void obstacle(int period, int safety,int turning){
 
     if (distance_static > safety && mean_left > safety && mean_right > safety) //No obstacle
     {  
-        mc1.forward();
+        mc.forward();
         Serial.println("No obstacle");
     }
 
     else if (distance_static < safety && mean_left > safety && mean_right < safety) //Obtstacle on right-middle
     {
-        mc1.left();
+        mc.left();
         Serial.println("Obstacle right middle");
     }
 
     else if (distance_static < safety && mean_left < safety && mean_right > safety) //Obtstacle on left-middle
     {
-        mc1.right();
+        mc.right();
         Serial.println("Obstacle left middle");
     }
 
     else if (distance_static < safety && mean_left  < safety && mean_right < safety) //Obstacle direct in front
     {                               
-        mc1.left();
+        mc.left();
         Serial.println("Obstacle direct in front");
     }
 
     else if (distance_static < safety && mean_left  > safety && mean_right > safety) //No recogniziton from rotating
     {                               
-        mc1.left();
+        mc.left();
         Serial.println("No recogniziton from rotating");
     }
     else{
-        mc1.backwards();
+        mc.backwards();
         Serial.println("Error");
     }
-
+    mc.stop();
+    red.off();
     delay(period);
-    mc1.stop();
 }
 
 
+void obstacle(int period, int safety){
+    while (IRstate != 10 && IRstate != 11){
+        obstacle_single(period,safety,0);
+        obstacle_single(period,safety,1);
+        getData();
+        Serial.println(IRstate);
+    }
+
+}

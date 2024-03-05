@@ -6,43 +6,44 @@
 
 
 
-void remote()
+void remote(int refresh_remote)
 {
   MotorController mc;
-  while(IRstate != 6)
+  mc.set_speed(95);
+  LED red;
+  red.set(redPin);
+  red.on();
+
+  getData();
+
+  while(IRstate != 10 && IRstate != 11)  //IRstate != 11)
   {
-    getData();
-    IRstate = 5;
-    switch (IRstate)
-    {
-    case 5:
+    if (IRstate == 20){
       mc.forward();
-      break;
-    
-    case 11:
-      mc.backwards();
-      break;
-
-    case 7:
-      mc.left();
-      break;
-
-    default:
-      break;
     }
+
+    else if (IRstate ==21){
+        mc.backwards();
+    }
+    else if (IRstate == 22){
+      mc.right45();
+    }
+    else if(IRstate ==23){
+      mc.left45();
+    }
+  
     delay(refresh_remote);
     getData();
-    IRstate = 6;
+    Serial.println(IRstate);
   }
   mc.stop();
-    
+  red.off();
 }
 
 void testdrive(){
   MotorController mc1;
-  mc1.set_speed(200);
-  mc1.right45();
-  delay(5000);
-  mc1.left45();
+  mc1.set_speed(50);
+  mc1.right();
   delay(5000);
 }
+

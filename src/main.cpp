@@ -23,13 +23,13 @@ int PWMB = 6;
 
 //Vars vor servo motors
 int servosoundPin = 10;
-int servopickPin = 1;
+int servorearPin = A2;
 Servo servosound;
-Servo servopick;
+Servo servorear;
 
 //Vars for ultrasound sensors
-int echorotPin = 12;
-int trigrotPin = 13;
+int echorotPin = 12;//grün
+int trigrotPin = 13;//blau
 int echostatPin = A0;
 int trigstatPin = 11;
 float distancestat;
@@ -47,11 +47,11 @@ float linerightState;
 int IRpin = 2;
 IRsmallDecoder irDecoder(IRpin);
 irSmallD_t irData;
-int IRstate;
+int IRstate =40;
 
 //Vars for LEDs
 int redPin = 9;
-int green1Pin = A2;
+//int green1Pin = A2;
 int green2Pin = 0;
 int yellowPin = A1;
 
@@ -79,7 +79,7 @@ void setup()
 
   //Servo motor pins as output
   servosound.attach(servosoundPin);
-  servopick.attach(servopickPin);
+  servorear.attach(servorearPin);
 
   //Ultrasound
   pinMode(echorotPin,INPUT);
@@ -92,7 +92,7 @@ void setup()
 
   //LED pins as output
   pinMode(redPin,OUTPUT);
-  pinMode(green1Pin,OUTPUT);
+  //pinMode(green1Pin,OUTPUT);
   pinMode(green2Pin,OUTPUT);
   pinMode(yellowPin,OUTPUT);
 
@@ -109,62 +109,37 @@ void setup()
 #include "Components/LED.h"
 #include "Components/Test.h"
 
-//Void loop is the current loop version, the rest are only previous tests, don't delete
-void loop(){
-  obstacle(1000,10,0);
-  obstacle(1000,10,1);
-}
 
 
-void rotUltratest(){
-  rot_read(100,50,130,5);
-  rot_read(100,130,50,5);
-}  
-
-//Richtige Loop Function
-void loopreal()
+void loop()
 {
-  startup();
-  getData();
-  IRstate = 13;
-    switch (IRstate)
-    {
-    case 13:
-      remote();
-      break;
-    
-    case 14:
-      //line();
-      break;
-
-    case 15:
-    obstacle();
-      break;
-
-    default:
-      break;
-    }
-}
-
-  //if(irDecoder.dataAvailable(irData)){
-  //  int x = irData.cmd;
-  //  Serial.println(x);
-  //  if (x==26)Serial.println('The key is 9');
-  //}
-
-
-
-void linken(){
-  all_blinking(300,5);
-}
-
-void ir(){
-  if(irDecoder.dataAvailable(irData)){
-    Serial.println('angekommen');
-    int x = irData.cmd;
-    Serial.println(x);
-    if (x==26)Serial.println('The key is 9');
+  all_blinking(500,3);
+  all_on();
+  IRstate = 40;
+  while (IRstate == 40) 
+  {
+    getData();
+    Serial.println("waiting for data");
   }
+  all_off();
+  switch(IRstate) {
+
+    case 1: //Remote
+      Serial.println("remote was choosen");
+      remote(100);
+      break;
+
+    case 2: //Obstacle
+      obstacle(0,15);
+      Serial.println("obstacle was choosen");
+      break;
+
+    case 3: //Line following
+      line(100);
+      Serial.println("line was choosen");
+      break;
+  }
+  IRstate = 40;
 }
 
 
@@ -173,35 +148,6 @@ void ir(){
 
 
 
-  
-  //staticUltra ultra;
-  //int i = ultra.getDistance();
-  //Serial.println(i);
-  //delay(1000);
-
-  ///Startupsequence: all LEDS blink for 3s
-  ///...
-
-  //Read IRButton
-  //irState = ...;
-
-    ///Choose Mode: 1-Line 2- Obstacle 3- Remote 
-  //switch (irState){
-    //case 1: //Remote
-      //remote();
-      //break;
-
-    //case 2: //Obstacle
-      //obstacle();
-      //break;
-
-    //case 3: //LineFollowing
-      //linefollowing();
-      //break;
-  //}
-
-  ///Stop Everything when pushing Stop/Mode or Off Switch -> How implementation?
-  ///New Choice
 
 
 

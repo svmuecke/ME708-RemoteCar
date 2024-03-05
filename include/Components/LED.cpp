@@ -31,51 +31,46 @@ void LED::onoff(int duration = 1000)
   digitalWrite(pin,LOW);
 }
 
-void startup(){
-  LED yellow;
-  yellow.set(yellowPin);
-  LED red;
-  red.set(redPin);
-  LED green1;
-  green1.set(green1Pin);
-  LED green2;
-  green2.set(green2Pin);
-  for (int i = 1; i<4; i++)
-    red.on();
-    yellow.on();
-    green1.on();
-    green2.on();
-    delay(500);
-    red.off();
-    yellow.off();
-    green1.off();
-    green2.off();
-    delay(500);
-}
 
 
-void all_blinking(int duration, int repets)
+void all_blinking(int duration, int repeats)
 {
    LED yellow;
   yellow.set(yellowPin);
   LED red;
   red.set(redPin);
-  LED green1;
-  green1.set(green1Pin);
   LED green2;
   green2.set(green2Pin);
   red.on();
-  for (int i = 1; i<= repets; i++)
+  for (int i = 1; i<= repeats; i++)
   {
     red.on();
     yellow.on();
-    green1.on();
     green2.on();
     delay(duration);
     red.off();
     yellow.off();
-    green1.off();
     green2.off();
     delay(duration);
   }
+}
+
+void all_on()
+{
+   LED yellow;
+  yellow.set(yellowPin);
+  LED red;
+  red.set(redPin);
+  red.on();
+  yellow.on();
+}
+
+void all_off()
+{
+   LED yellow;
+  yellow.set(yellowPin);
+  LED red;
+  red.set(redPin);
+  red.off();
+  yellow.off();
 }

@@ -3,3 +3,5 @@
 
 
 class MotorController;
+
+void test_servo();
