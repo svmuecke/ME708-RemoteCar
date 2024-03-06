@@ -105,7 +105,7 @@ void obstacle_single(int period, int safety,int turning){
 
     MotorController mc;
     //mc1.set_speed(150);
-
+    while (IRstate != 10 && IRstate != 11){	
     stat_read(0);
     if (turning == 0){
         rot_read(100,50,130,10);
@@ -153,18 +153,15 @@ void obstacle_single(int period, int safety,int turning){
         mc.backwards();
         Serial.println("Error");
     }
+    delay(period);
+    }
     mc.stop();
     red.off();
-    delay(period);
 }
 
 
 void obstacle(int period, int safety){
-    while (IRstate != 10 && IRstate != 11){
-        obstacle_single(period,safety,0);
-        obstacle_single(period,safety,1);
-        getData();
-        Serial.println(IRstate);
-    }
+    
+    obstacle_single(0,10,10);
 
 }

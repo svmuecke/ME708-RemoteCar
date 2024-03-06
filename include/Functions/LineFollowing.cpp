@@ -58,7 +58,7 @@ void line(int period){
 
 
         MotorController mc1;
-        mc1.set_speed(70);
+        mc1.set_speed(50);
 
         line_read(0);
         calculate_proportion(0);

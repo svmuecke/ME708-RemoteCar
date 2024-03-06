@@ -109,8 +109,6 @@ void setup()
 #include "Components/LED.h"
 #include "Components/Test.h"
 
-
-
 void loop()
 {
   all_blinking(500,3);
@@ -130,7 +128,7 @@ void loop()
       break;
 
     case 2: //Obstacle
-      obstacle(0,15);
+      obstacle(10,15);
       Serial.println("obstacle was choosen");
       break;
 

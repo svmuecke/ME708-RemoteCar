@@ -31,6 +31,9 @@ void remote(int refresh_remote)
     else if(IRstate ==23){
       mc.left45();
     }
+    else if(IRstate ==12){
+      mc.stop();
+    }
   
     delay(refresh_remote);
     getData();
