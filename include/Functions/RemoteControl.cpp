@@ -9,7 +9,7 @@
 void remote(int refresh_remote)
 {
   MotorController mc;
-  mc.set_speed(95);
+  mc.set_speed(120);
   LED red;
   red.set(redPin);
   red.on();
@@ -20,24 +20,28 @@ void remote(int refresh_remote)
   {
     if (IRstate == 20){
       mc.forward();
+      Serial.println("Forward");
     }
 
     else if (IRstate ==21){
         mc.backwards();
+        Serial.println("Backwards");
     }
     else if (IRstate == 22){
-      mc.right45();
+      mc.right();
+      Serial.println("Right");
     }
     else if(IRstate ==23){
       mc.left45();
+      Serial.println("Left");
     }
     else if(IRstate ==12){
       mc.stop();
+      Serial.println("Stop");
     }
   
     delay(refresh_remote);
     getData();
-    Serial.println(IRstate);
   }
   mc.stop();
   red.off();

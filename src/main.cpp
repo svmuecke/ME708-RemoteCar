@@ -1,7 +1,7 @@
 //Remote-Car
 //Marma, Kyamra; Vaitkune, Simona; Siemens, Seth Henry; Mücke, Sven
-//Date: 02/07/2024
-//Version: V1
+//Date: 03/07/2024
+//Version: V4
 
 //Inlude external libaries
 #include <Arduino.h>
@@ -10,7 +10,6 @@
 #include <IRsmallDecoder.h>
 
 using namespace std;
-
 
 //Defining vars
 //Vars for motor controller
@@ -66,8 +65,7 @@ void setup()
 {
   //Start Serial Monitor
   Serial.begin(9600);
-  Serial.println("Waiting for a NEC remote control IR signal...");
-  Serial.println("cmd");
+  Serial.println("Start");
 
   //Motor controller pins as output
   pinMode(AIN1,OUTPUT);
@@ -107,34 +105,45 @@ void setup()
 #include "Functions/ObstacleAvoidance.h"
 #include "Components/IR.h"
 #include "Components/LED.h"
-#include "Components/Test.h"
 
 void loop()
 {
-  all_blinking(500,3);
+  //servorear.write(90);
+  //servosound.write(86);
+
+  all_blinking(500,2);
   all_on();
+
   IRstate = 40;
+
   while (IRstate == 40) 
   {
     getData();
     Serial.println("waiting for data");
   }
+
   all_off();
+
   switch(IRstate) {
 
     case 1: //Remote
       Serial.println("remote was choosen");
-      remote(100);
+      remote(150);
       break;
 
     case 2: //Obstacle
-      obstacle(10,15);
       Serial.println("obstacle was choosen");
+      obstacle2(0,15);
       break;
 
     case 3: //Line following
-      line(100);
       Serial.println("line was choosen");
+      line(50);
+      break;
+
+    case 9: //read linefollowing
+      Serial.println("Line-check was choosen");
+      check_lines(5000);
       break;
   }
   IRstate = 40;

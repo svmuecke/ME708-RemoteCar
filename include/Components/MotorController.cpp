@@ -14,7 +14,9 @@ class MotorController{
 	void stop();
 	void backwards();
   	void right();
+	void righthard();
   	void left();
+	void lefthard();
 	void right45();
 	void left45();
 };
@@ -70,6 +72,18 @@ void MotorController::right()
 	servorear.write(150);
 }
 
+//Turn left on spot
+void MotorController::righthard()
+{
+	digitalWrite(AIN1, HIGH);
+	digitalWrite(AIN2,LOW);
+  	digitalWrite(BIN1, LOW);
+	digitalWrite(BIN2, HIGH);
+	analogWrite(PWMA, speedturn);
+  	analogWrite(PWMB, speedturn);
+	servorear.write(160);
+}
+
 //Turn left while continuing forward driving
 void MotorController::right45()
 {
@@ -93,6 +107,17 @@ void MotorController::left()
 	servorear.write(30);
 }
 
+//Turn right on spot
+void MotorController::lefthard()
+{
+	digitalWrite(AIN1, LOW);
+	digitalWrite(AIN2, HIGH);
+  	digitalWrite(BIN1, HIGH);
+	digitalWrite(BIN2, LOW);
+	analogWrite(PWMA, speedturn);
+  	analogWrite(PWMB, speedturn);
+	servorear.write(30);
+}
 //Turn right while continuing forward driving
 void MotorController::left45()
 {

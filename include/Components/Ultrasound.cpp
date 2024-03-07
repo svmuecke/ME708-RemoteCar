@@ -11,8 +11,6 @@ class Ultrasound{
         int trig;
         void set(int echopin, int trigpin);
         float getDistance();
-        
-
 };
 
 void Ultrasound::set(int echopin, int trigpin)
